@@ -14,7 +14,19 @@ class ProductController extends Controller
     {
         $productColl = Product::all();
 
-        return response()->json($productColl, 200);
+        foreach ($productColl as $product) {
+            $response = [
+                'id' => $product['id'],
+                'productName' => $product['productName'],
+                'productDescription' => $product['productDescription'],
+                'price' => $product['price'],
+                'categoryId' => $product->category()->where('id', $product['category_id'])->pluck('categoryName')->pop()
+            ];
+
+            $responseColl[] = $response;
+        }
+
+        return response()->json($responseColl, 200);
     }
 
     //Add new Product
