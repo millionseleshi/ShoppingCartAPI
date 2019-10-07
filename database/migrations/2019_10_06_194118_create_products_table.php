@@ -13,17 +13,18 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::enableForeignKeyConstraints();
+
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('productName');
             $table->string('productDescription');
             $table->unsignedInteger('price');
-            $table->unsignedInteger('category_id');
+            $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
 
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
