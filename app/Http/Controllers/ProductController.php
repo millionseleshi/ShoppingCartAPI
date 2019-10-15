@@ -46,10 +46,15 @@ class ProductController extends Controller
                 ->where('categoryName', '=', $request['categoryName'])
                 ->pluck('id')->pop();
 
+            $productImage = $request->file('productImage');
+            $fileName = time() . $productImage->getClientOriginalName();
+            $productImage->move('ProductImages', $fileName);
+
             Product::create(
                 [
                     'productName' => $request['productName'],
                     'productDescription' => $request['productDescription'],
+                    'productImage' => $fileName,
                     'price' => $request['price'],
                     'category_id' => $categoryID
                 ]);

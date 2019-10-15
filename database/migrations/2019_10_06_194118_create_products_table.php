@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('productName');
             $table->string('productDescription');
+            $table->string('productImage')->nullable();
             $table->unsignedInteger('price');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');

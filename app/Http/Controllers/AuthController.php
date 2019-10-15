@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 
-use Carbon\Carbon;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -73,7 +73,7 @@ class AuthController extends Controller
                     'password' => bcrypt($request['password'])
                 ]);
 
-            $success['userName']=$request->userName;
+            $success['userName'] = $request->username;
             $success['token'] =  $user->createToken('UserToken')-> accessToken;
             $success['tokenType'] = "Bearer ";
             $success['message'] =  "Successfully Created Account";
